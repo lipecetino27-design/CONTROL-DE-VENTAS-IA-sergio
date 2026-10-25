@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a43">
+  <meta name="description" content="VentaControl IA: sistemas de control comercial en Excel y soluciones digitales adaptadas a tu negocio.">
+  <title>VentaControl IA | Soluciones inteligentes</title>
+
+  <style>
+    :root {
+      --navy: #102a43;
+      --navy-dark: #091b2b;
+      --green: #14945b;
+      --green-light: #37c486;
+      --text: #19334b;
+      --muted: #64788b;
+      --background: #f4f7fb;
+      --border: #dfe7ef;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background: var(--white);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    /* NAVEGACIÓN */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .navbar {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--navy);
+      border-bottom: 4px solid var(--green);
+      color: white;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .brand-logo span {
+      color: var(--green-light);
+    }
+
+    .brand-name strong {
+      display: block;
+      color: var(--navy);
+      font-size: 19px;
+      letter-spacing: -.6px;
+      line-height: 1.3;
+    }
+
+    .brand-name strong span {
+      color: var(--green);
+    }
+
+    .brand-name small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 700;
+      color: #344b60;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .nav-links .nav-button {
+      padding: 13px 18px;
+      color: white;
+      background: var(--green);
+      border-radius: 9px;
+    }
+
+    .nav-links .nav-button:hover {
+      color: white;
+      background: #107b4b;
+    }
+
+    /* PORTADA */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 85px 0 78px;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(55,196,134,.13), transparent 32%),
+        linear-gradient(120deg, #f7f9fc, #edf4fa);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      margin: 22px 0;
+      max-width: 650px;
+      color: var(--navy);
+      font-size: clamp(43px, 5.1vw, 66px);
+      line-height: 1.06;
+      letter-spacing: -2.8px;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero-description {
+      max-width: 590px;
+      color: #596f83;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      min-height: 51px;
+      padding: 13px 20px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: white;
+      background: var(--green);
+      box-shadow: 0 10px 25px rgba(20,148,91,.18);
+    }
+
+    .button-primary:hover {
+      background: #107b4b;
+    }
+
+    .button-secondary {
+      color: var(--navy);
+      background: white;
+      border: 1px solid #d1dce7;
+    }
+
+    .trust-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .trust-points span::first-letter {
+      color: var(--green);
+    }
+
+    /* PANEL ILUSTRATIVO */
+
+    .dashboard {
+      padding: 25px;
+      border: 1px solid #dce5ee;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 25px 70px rgba(16,42,67,.12);
+    }
+
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .dashboard-header small {
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
+
+    .dashboard h2 {
+      margin-top: 5px;
+      color: var(--navy);
+      font-size: 21px;
+    }
+
+    .demo-label {
+      padding: 6px 10px;
+      border-radius: 20px;
+      color: #117346;
+      background: #e8f7ef;
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .demo-note {
+      margin: 4px 0 18px;
+      color: #8796a4;
+      font-size: 10px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 9px;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 13px 10px;
+      border: 1px solid #e2eaf2;
+      border-radius: 10px;
+      background: #fbfdff;
+    }
+
+    .metric small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .metric strong {
+      display: block;
+      margin: 7px 0;
+      color: var(--navy);
+      font-size: clamp(14px, 1.5vw, 20px);
+    }
+
+    .chart {
+      margin-top: 15px;
+      padding: 17px;
+      border: 1px solid #e2eaf2;
+      border-radius: 12px;
+    }
+
+    .chart-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .chart-title span {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .bars {
+      height: 150px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      gap: 12px;
+      margin-top: 15px;
+      border-bottom: 1px solid var(--border);
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 35px,
+        #edf2f6 36px
+      );
+    }
+
+    .bar {
+      width: 28px;
+      min-height: 12px;
+      border-radius: 5px 5px 0 0;
+      background: linear-gradient(#69b4df, #3785b8);
+    }
+
+    .bar.green {
+      background: linear-gradient(#45ce91, #15945b);
+    }
+
+    .bar-wrap {
+      height: 100%;
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .bar-wrap small {
+      padding-bottom: 5px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .dashboard-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 10px;
+      background: #eff9f3;
+    }
+
+    .check-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      border-radius: 9px;
+      color: white;
+      background: var(--green);
+      font-weight: 900;
+    }
+
+    .dashboard-footer strong,
+    .dashboard-footer small {
+      display: block;
+    }
+
+    .dashboard-footer strong {
+      color: var(--navy);
+      font-size: 11px;
+    }
+
+    .dashboard-footer small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* BARRA DE PRINCIPIOS */
+
+    .principles-strip {
+      padding: 21px 0;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    .principles-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: #536b80;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    /* SECCIONES GENERALES */
+
+    .section {
+      padding: 95px 0;
+    }
+
+    .section-heading {
+      max-width: 710px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2,
+    .benefits h2 {
+      margin: 14px 0;
+      color: var(--navy);
+      font-size: clamp(31px, 4vw, 44px);
+      line-height: 1.18;
+      letter-spacing: -1.5px;
+    }
+
+    .section-heading p,
+    .benefits-copy p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    /* SERVICIOS */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 27px 23px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: white;
+      transition: .25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 40px rgba(16,42,67,.08);
+    }
+
+    .service-card.featured {
+      border-color: #b7dfc9;
+      background: linear-gradient(160deg, #f3fbf6, white);
+    }
+
+    .service-number {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.3px;
+    }
+
+    .service-card h3 {
+      margin: 14px 0 10px;
+      color: var(--navy);
+      font-size: 21px;
+      line-height: 1.35;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .service-card ul {
+      display: grid;
+      gap: 8px;
+      margin: 20px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .service-card li {
+      color: #425a70;
+      font-size: 12px;
+    }
+
+    .service-card li::before {
+      content: "✓";
+      margin-right: 9px;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .service-link {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .service-link span {
+      color: var(--green);
+      font-size: 17px;
+    }
+
+    .disclaimer {
+      margin-top: 22px;
+      color: #8190a0;
+      font-size: 10px;
+    }
+
+    /* BENEFICIOS */
+
+    .benefits {
+      background: var(--background);
+      border-block: 1px solid var(--border);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 75px;
+      align-items: center;
+    }
+
+    .benefits-copy p {
+      margin-bottom: 25px;
+    }
+
+    .benefit-item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 15px;
+      padding: 21px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .benefit-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .benefit-number {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .benefit-item h3 {
+      margin-bottom: 5px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .benefit-item p {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* PROCESO */
+
+    .centered {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 24px;
+    }
+
+    .process-step {
+      min-width: 0;
+    }
+
+    .step-number {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .step-line {
+      height: 2px;
+      margin: 18px 0 22px;
+      background: var(--border);
+    }
+
+    .step-line span {
+      display: block;
+      width: 35px;
+      height: 3px;
+      background: var(--green);
+    }
+
+    .process-step h3 {
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .process-step p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* FUNDADOR */
+
+    .founder {
+      padding: 90px 0;
+      background: linear-gradient(180deg, #f4f7fb, white);
+      border-top: 1px solid var(--border);
+    }
+
+    .founder-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .founder-card {
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: white;
+      box-shadow: 0 20px 55px rgba(16,42,67,.09);
+    }
+
+    .founder-card-top {
+      display: flex;
+      justify-content: space-between;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
+
+    .founder-visual {
+      margin: 24px 0;
+      padding: 34px 28px;
+      border-radius: 13px;
+      color: white;
+      background: linear-gradient(140deg, var(--navy-dark), #143a4a);
+    }
+
+    .founder-monogram {
+      font-size: 76px;
+      font-weight: 900;
+      letter-spacing: -6px;
+      line-height: 1;
+    }
+
+    .founder-monogram span {
+      color: var(--green-light);
+    }
+
+    .founder-logo-name {
+      margin-top: 25px;
+      font-size: 24px;
+      font-weight: 850;
+    }
+
+    .founder-logo-name span {
+      color: var(--green-light);
+    }
+
+    .founder-rule {
+      width: 42px;
+      height: 3px;
+      margin: 22px 0;
+      background: var(--green-light);
+    }
+
+    .founder-visual p {
+      color: #d2e0e9;
+      font-size: 13px;
+    }
+
+    .founder-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: 1px;
+    }
+
+    .founder-copy h2 {
+      margin: 15px 0 20px;
+      color: var(--navy);
+      font-size: clamp(32px, 3.5vw, 45px);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+    }
+
+    .founder-copy h2 span {
+      display: block;
+      color: var(--green);
+    }
+
+    .founder-intro {
+      margin-bottom: 13px;
+      color: #3e566b;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .founder-description {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .founder-principle {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .founder-principle:first-child {
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .founder-principle > span {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .founder-principle h3 {
+      color: var(--navy);
+      font-size: 13px;
+    }
+
+    .founder-principle p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .signature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .signature-mark {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      color: var(--navy);
+      background: white;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .signature strong,
+    .signature small {
+      display: block;
+    }
+
+    .signature strong {
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    .signature small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* CONTACTO */
+
+    .contact {
+      padding: 85px 0;
+      color: white;
+      background:
+        radial-gradient(circle at 5% 95%, rgba(20,148,91,.2), transparent 35%),
+        linear-gradient(120deg, var(--navy-dark), #123548);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .eyebrow-light {
+      color: #65e1a7;
+    }
+
+    .contact-copy h2 {
+      margin: 17px 0;
+      max-width: 560px;
+      color: white;
+      font-size: clamp(34px, 4.2vw, 50px);
+      line-height: 1.13;
+      letter-spacing: -1.5px;
+    }
+
+    .contact-copy > p {
+      max-width: 540px;
+      color: #c5d5e0;
+      font-size: 14px;
+    }
+
+    .contact-points {
+      display: grid;
+      gap: 10px;
+      margin-top: 25px;
+      color: #e3edf2;
+      font-size: 12px;
+    }
+
+    .contact-note {
+      margin-top: 25px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      color: #a8bdcc;
+      font-size: 10px;
+    }
+
+    .contact-form {
+      padding: 29px;
+      border-radius: 17px;
+      color: var(--text);
+      background: white;
+      box-shadow: 0 25px 70px rgba(0,0,0,.16);
+    }
+
+    .contact-form h3 {
+      margin: 8px 0 3px;
+      color: var(--navy);
+      font-size: 25px;
+    }
+
+    .form-intro {
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin: 14px 0 6px;
+      color: #294158;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .contact-form label span {
+      color: var(--green);
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d8e2eb;
+      border-radius: 8px;
+      outline: none;
+      color: var(--text);
+      background: #fbfdff;
+      font-size: 12px;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(20,148,91,.1);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .submit-button {
+      width: 100%;
+      margin-top: 19px;
+      border: none;
+    }
+
+    .privacy-note,
+    .form-feedback {
+      margin-top: 10px;
+      color: #8391a0;
+      font-size: 10px;
+    }
+
+    .form-feedback {
+      color: #a33b32;
+    }
+
+    /* PIE DE PÁGINA */
+
+    footer {
+      color: #d9e4ec;
+      background: #081927;
+    }
+
+    .footer-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 29px;
+      padding-bottom: 29px;
+    }
+
+    .footer-brand strong {
+      color: white;
+      font-size: 18px;
+    }
+
+    .footer-brand strong span {
+      color: var(--green-light);
+    }
+
+    .footer-brand small {
+      display: block;
+      color: #a6bac9;
+      font-size: 10px;
+    }
+
+    .footer-main p,
+    .back-top {
+      color: #a6bac9;
+      font-size: 11px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 17px;
+      padding-bottom: 20px;
+      border-top: 1px solid rgba(255,255,255,.13);
+      color: #8197a9;
+      font-size: 10px;
+    }
+
+    /* ADAPTACIÓN A TABLET Y CELULARES */
+
+    @media (max-width: 1000px) {
+      .nav-links { gap: 13px; }
+      .nav-links a { font-size: 11px; }
+      .hero-grid { gap: 30px; }
+      .benefits-grid,
+      .founder-grid,
+      .contact-grid { gap: 35px; }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: calc(100% - 34px); }
+      .navbar { min-height: 72px; }
+      .brand-logo { width: 43px; height: 43px; }
+      .brand-name strong { font-size: 17px; }
+      .brand-name small { font-size: 9px; }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 20px 20px;
+        border-bottom: 1px solid var(--border);
+        background: white;
+        box-shadow: 0 18px 25px rgba(16,42,67,.08);
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 11px 6px; font-size: 13px; }
+      .nav-links .nav-button { margin-top: 5px; text-align: center; }
+
+      .menu-toggle {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        background: white;
+        cursor: pointer;
+      }
+
+      .menu-toggle span {
+        width: 19px;
+        height: 2px;
+        background: var(--navy);
+      }
+
+      .hero { padding: 55px 0 48px; }
+      .hero-grid,
+      .benefits-grid,
+      .founder-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-grid { gap: 37px; }
+      h1 { font-size: clamp(41px, 10vw, 55px); letter-spacing: -2px; }
+      .hero-description { font-size: 14px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .button { width: 100%; }
+      .dashboard { padding: 17px; }
+      .metric { padding: 11px 8px; }
+      .metric strong { font-size: 14px; }
+      .principles-inner { justify-content: center; font-size: 10px; }
+      .section { padding: 65px 0; }
+      .services-grid { grid-template-columns: 1fr; gap: 20px; }
+      .section-heading h2,
+      .benefits h2 { font-size: clamp(31px, 8vw, 39px); }
+      .benefits-grid { gap: 30px; }
+      .process-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px 20px; }
+      .founder { padding: 65px 0; }
+      .founder-grid { gap: 35px; }
+      .founder-copy h2 { font-size: clamp(32px, 8vw, 42px); }
+      .contact { padding: 65px 0; }
+      .contact-grid { gap: 32px; }
+      .contact-form { padding: 23px 19px; }
+      .footer-main { align-items: flex-start; flex-direction: column; }
+      .footer-bottom { flex-direction: column; }
+    }
+
+    @media (max-width: 420px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .metric strong { font-size: 13px; }
+      .chart { padding: 13px 10px; }
+      .chart-title { flex-direction: column; gap: 3px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container navbar">
+    <a class="brand" href="#inicio" aria-label="VentaControl IA, inicio">
+      <div class="brand-logo">VC<span>.</span></div>
+      <div class="brand-name">
+        <strong>VentaControl <span>IA</span></strong>
+        <small>Control comercial y soluciones digitales</small>
+      </div>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" type="button"
+      aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#soluciones">Soluciones</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#metodo">Método</a>
+      <a href="#fundador">Nosotros</a>
+      <a class="nav-button" href="#contacto">Solicitar cotización ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">CONTROL · ORGANIZACIÓN · CRECIMIENTO</div>
+        <h1>Tu negocio merece <span>más claridad</span> para crecer.</h1>
+        <p class="hero-description">
+          Diseñamos sistemas de control en Excel y soluciones digitales que te
+          ayudan a organizar clientes, pedidos y resultados con una visión más
+          clara de tu operación.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#contacto">Hablemos de tu negocio →</a>
+          <a class="button button-secondary" href="#soluciones">Explorar soluciones</a>
+        </div>
+        <div class="trust-points">
+          <span>✓ Enfoque práctico</span>
+          <span>✓ Propuestas a tu medida</span>
+          <span>✓ Comunicación clara</span>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <div class="dashboard-header">
+          <div><small>PANEL DE CONTROL</small><h2>Resumen comercial</h2></div>
+          <span class="demo-label">DEMO</span>
+        </div>
+        <p class="demo-note">Ejemplo ilustrativo con datos ficticios</p>
+
+        <div class="metrics">
+          <div class="metric"><small>Ventas</small><strong>Q 24,850</strong><small>Ejemplo</small></div>
+          <div class="metric"><small>Pedidos</small><strong>128</strong><small>Ejemplo</small></div>
+          <div class="metric"><small>Clientes</small><strong>86</strong><small>Ejemplo</small></div>
+        </div>
+
+        <div class="chart">
+          <div class="chart-title"><strong>Actividad comercial</strong><span>Datos de demostración</span></div>
+          <div class="bars" aria-hidden="true">
+            <div class="bar-wrap"><div class="bar green" style="height:38%"></div><small>Ene</small></div>
+            <div class="bar-wrap"><div class="bar" style="height:56%"></div><small>Feb</small></div>
+            <div class="bar-wrap"><div class="bar green" style="height:49%"></div><small>Mar</small></div>
+            <div class="bar-wrap"><div class="bar" style="height:72%"></div><small>Abr</small></div>
+            <div class="bar-wrap"><div class="bar green" style="height:65%"></div><small>May</small></div>
+            <div class="bar-wrap"><div class="bar" style="height:88%"></div><small>Jun</small></div>
+          </div>
+        </div>
+
+        <div class="dashboard-footer">
+          <div class="check-icon">✓</div>
+          <div><strong>Más claridad para decidir</strong><small>Organiza la información que importa.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="principles-strip">
+    <div class="container principles-inner">
+      <span>Soluciones para la operación real</span>
+      <span>•</span><span>Información estructurada</span>
+      <span>•</span><span>Mejora continua</span>
+      <span>•</span><span>Atención cercana</span>
+    </div>
+  </section>
+
+  <section class="section" id="soluciones">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow">QUÉ PODEMOS HACER</div>
+        <h2>Herramientas pensadas para trabajar mejor.</h2>
+        <p>Partimos de tus procesos y tus necesidades para definir una solución útil, comprensible y realista.</p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <span class="service-number">01 / SISTEMAS PREPARADOS</span>
+          <h3>Control de ventas en Excel</h3>
+          <p>Organiza operaciones y consulta los datos clave sin depender de hojas dispersas.</p>
+          <ul>
+            <li>Registro estructurado de ventas</li>
+            <li>Metas e indicadores</li>
+            <li>Resúmenes y reportes</li>
+          </ul>
+          <a class="service-link" href="#contacto">Consultar disponibilidad <span>→</span></a>
+        </article>
+
+        <article class="service-card featured">
+          <span class="service-number">02 / DESARROLLO A MEDIDA</span>
+          <h3>Soluciones personalizadas</h3>
+          <p>Diseñamos herramientas según el flujo de trabajo, los datos y los objetivos de tu operación.</p>
+          <ul>
+            <li>Seguimiento de clientes y pedidos</li>
+            <li>Control de inventario y procesos</li>
+            <li>Automatización de tareas viables</li>
+          </ul>
+          <a class="service-link" href="#contacto">Cuéntanos tu necesidad <span>→</span></a>
+        </article>
+
+        <article class="service-card">
+          <span class="service-number">03 / ORGANIZACIÓN</span>
+          <h3>Diagnóstico y mejora</h3>
+          <p>Identificamos qué información necesitas controlar y qué pasos pueden simplificarse.</p>
+          <ul>
+            <li>Revisión de necesidades</li>
+            <li>Definición de prioridades</li>
+            <li>Propuesta clara de alcance</li>
+          </ul>
+          <a class="service-link" href="#contacto">Solicitar evaluación <span>→</span></a>
+        </article>
+      </div>
+      <p class="disclaimer">Cada proyecto se define según su alcance y las herramientas necesarias. Las funciones se confirman antes de iniciar.</p>
+    </div>
+  </section>
+
+  <section class="section benefits" id="beneficios">
+    <div class="container benefits-grid">
+      <div class="benefits-copy">
+        <div class="eyebrow">MENOS DESORDEN. MÁS VISIBILIDAD.</div>
+        <h2>La información debe ayudarte a avanzar, no complicarte el día.</h2>
+        <p>Un sistema útil no tiene que ser complicado. Debe responder preguntas concretas y hacer más sencillo el trabajo cotidiano.</p>
+        <a class="button button-primary" href="#contacto">Encontrar una solución →</a>
+      </div>
+
+      <div>
+        <article class="benefit-item">
+          <span class="benefit-number">01</span>
+          <div><h3>Visibilidad de la operación</h3><p>Consulta en un mismo lugar los datos que necesitas revisar con frecuencia.</p></div>
+        </article>
+        <article class="benefit-item">
+          <span class="benefit-number">02</span>
+          <div><h3>Procesos más ordenados</h3><p>Establece una forma consistente de registrar y consultar la información.</p></div>
+        </article>
+        <article class="benefit-item">
+          <span class="benefit-number">03</span>
+          <div><h3>Decisiones con contexto</h3><p>Utiliza resúmenes e indicadores como apoyo para decidir.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="metodo">
+    <div class="container">
+      <div class="section-heading centered">
+        <div class="eyebrow">CÓMO TRABAJAMOS</div>
+        <h2>Un proceso claro, de principio a entrega.</h2>
+        <p>Antes de construir, entendemos. Antes de entregar, revisamos el alcance acordado.</p>
+      </div>
+
+      <div class="process-grid">
+        <article class="process-step"><span class="step-number">01</span><div class="step-line"><span></span></div><h3>Escuchamos</h3><p>Conocemos tu negocio, los retos actuales y lo que necesitas controlar.</p></article>
+        <article class="process-step"><span class="step-number">02</span><div class="step-line"><span></span></div><h3>Definimos</h3><p>Delimitamos prioridades, funciones, entregables y condiciones del proyecto.</p></article>
+        <article class="process-step"><span class="step-number">03</span><div class="step-line"><span></span></div><h3>Construimos</h3><p>Desarrollamos la solución acordada y comprobamos sus funciones principales.</p></article>
+        <article class="process-step"><span class="step-number">04</span><div class="step-line"><span></span></div><h3>Entregamos</h3><p>Explicamos cómo utilizarla y acordamos los siguientes pasos.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="founder" id="fundador">
+    <div class="container founder-grid">
+      <div class="founder-card">
+        <div class="founder-card-top"><span>NUESTRA IDENTIDAD</span><span>VC / 01</span></div>
+        <div class="founder-visual">
+          <div class="founder-monogram">VC<span>.</span></div>
+          <div class="founder-logo-name">VentaControl <span>IA</span></div>
+          <div class="founder-rule"></div>
+          <p>La información organizada puede convertirse en una ventaja para tu negocio.</p>
+        </div>
+        <div class="founder-tags"><span>ORGANIZACIÓN</span><span>CONTROL</span><span>CRECIMIENTO</span></div>
+      </div>
+
+      <div class="founder-copy">
+        <div class="eyebrow">DETRÁS DE LA MARCA</div>
+        <h2>No se trata solo de vender. <span>Se trata de tener el control.</span></h2>
+        <p class="founder-intro">VentaControl IA nace con una perspectiva práctica: ayudar a los negocios a organizar su operación comercial y comprender mejor la información que utilizan cada día.</p>
+        <p class="founder-description">Desarrollamos sistemas de control en Excel y soluciones digitales ajustadas a necesidades concretas. Nuestro enfoque es escuchar, definir el alcance con claridad y proponer herramientas comprensibles que aporten valor real.</p>
+
+        <div class="founder-principle"><span>01</span><div><h3>Claridad antes que complejidad</h3><p>La herramienta debe ser comprensible y útil para quien la utiliza.</p></div></div>
+        <div class="founder-principle"><span>02</span><div><h3>Soluciones con propósito</h3><p>Cada propuesta parte de una necesidad real y un alcance definido.</p></div></div>
+        <div class="founder-principle"><span>03</span><div><h3>Compromiso y transparencia</h3><p>Expectativas claras, comunicación directa y condiciones acordadas.</p></div></div>
+
+        <div class="signature">
+          <div class="signature-mark">SC</div>
+          <div><strong>Sergio Cetino</strong><small>Fundador y creador de VentaControl IA</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="container contact-grid">
+      <div class="contact-copy">
+        <div class="eyebrow eyebrow-light">HABLEMOS DE TU PROYECTO</div>
+        <h2>Tu negocio merece herramientas que trabajen contigo.</h2>
+        <p>Cuéntanos qué quieres organizar, controlar o mejorar. Revisaremos tu solicitud para definir los siguientes pasos.</p>
+        <div class="contact-points">
+          <span>✓ Atención personalizada</span>
+          <span>✓ Cotización según alcance</span>
+          <span>✓ Sin compromiso de contratación</span>
+        </div>
+        <p class="contact-note">El formulario prepara un mensaje para WhatsApp. No realiza cobros ni confirma servicios automáticamente.</p>
+      </div>
+
+      <form class="contact-form" id="quoteForm">
+        <div class="eyebrow">PRIMER CONTACTO</div>
+        <h3>Solicita una cotización</h3>
+        <p class="form-intro">Comparte estos datos para entender tu necesidad.</p>
+
+        <label for="name">Nombre <span>*</span></label>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required>
+
+        <label for="business">Nombre del negocio <span>*</span></label>
+        <input id="business" name="business" type="text" autocomplete="organization" placeholder="Nombre de tu negocio" required>
+
+        <label for="solution">¿Qué necesitas? <span>*</span></label>
+        <select id="solution" name="solution" required>
+          <option value="">Selecciona una opción</option>
+          <option>Control de ventas en Excel</option>
+          <option>Seguimiento de clientes y pedidos</option>
+          <option>Control de inventario</option>
+          <option>Solución personalizada</option>
+          <option>Necesito orientación</option>
+        </select>
+
+        <label for="details">Cuéntanos un poco más</label>
+        <textarea id="details" name="details" rows="4" placeholder="¿Qué problema quieres resolver?"></textarea>
+
+        <button class="button button-primary submit-button" type="submit">Preparar mensaje de WhatsApp ↗</button>
+        <p class="privacy-note">El formulario no guarda tus datos. Revisa el mensaje antes de enviarlo.</p>
+        <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-main">
+    <a class="footer-brand" href="#inicio"><strong>VentaControl <span>IA</span></strong><small>Organiza. Controla. Vende. Crece.</small></a>
+    <p>Soluciones prácticas para una gestión comercial más clara.</p>
+    <a class="back-top" href="#inicio">Volver arriba ↑</a>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> VentaControl IA. Todos los derechos reservados.</span>
+    <span>Fundado por Sergio Cetino</span>
+  </div>
+</footer>
+
+<script>
+  /*
+    CONFIGURACIÓN PENDIENTE:
+    Cambia PON_AQUI_TU_NUMERO por tu número internacional.
+    Guatemala: 502 seguido de tu número, sin +, espacios ni guiones.
+  */
+  const WHATSAPP_NUMBER = "PON_AQUI_TU_NUMERO";
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", function () {
+    const isOpen = navLinks.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+  });
+
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  document.getElementById("quoteForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const message = [
+      "Hola, VentaControl IA. Quisiera consultar una posible solución.",
+      "",
+      "Nombre: " + data.get("name"),
+      "Negocio: " + data.get("business"),
+      "Necesidad: " + data.get("solution"),
+      "Detalles: " + (data.get("details") || "Aún no tengo más detalles."),
+      "",
+      "Me gustaría conocer el alcance y las opciones de cotización."
+    ].join("\\n");
+
+    const number = WHATSAPP_NUMBER.replace(/\\D/g, "");
+    const feedback = document.getElementById("formFeedback");
+
+    const WHATSAPP_NUMBER = "50259682369";
+
+const number = WHATSAPP_NUMBER.replace(/\D/g, "");
+const feedback = document.getElementById("formFeedback");
+
+if (!number || WHATSAPP_NUMBER.includes("PON_AQUI")) {
+    feedback.textContent =
+        "Falta configurar el número de WhatsApp. No se ha enviado ningún dato.";
+    return;
+}
+
+window.open(
+    "https://wa.me/" + number + "?text=" + encodeURIComponent(message),
+    "_blank",
+    "noopener,noreferrer"
+);
+
+feedback.textContent =
+    "WhatsApp se abrió con el mensaje preparado. Revísalo y envíalo cuando estés listo.";
+}
+    }
+
+    window.open(
+      "https://wa.me/" + number + "?text=" + encodeURIComponent(message),
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    feedback.textContent = "WhatsApp se abrió con el mensaje preparado. Revísalo y envíalo cuando estés listo.";
+  });
+</script>
+
+</body>
+</html>
